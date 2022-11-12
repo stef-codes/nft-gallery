@@ -5,22 +5,32 @@ const Home = () => {
   const [collection, setCollectionAddress] = useState("");
   const [NFT, setNFTs] = useState([])
  
-  const fetchNFTs = asyc() => {
+  const fetchNFTs = async() => {
     let nfts; 
     console.log("fetching nfts"); 
     const api_key = "owZbZwB9hD1wDTBhsp74i5xpaXIzTBMb"
     const baseURL = `https://eth-mainnet.g.alchemy.com/v2/owZbZwB9hD1wDTBhsp74i5xpaXIzTBMb`;
     var requestOptions = {
-        method = GET
+        method: 'GET'
     };
   
     if (!collection.length) {
       const fetchURL = `${baseURL}?owner=${wallet}`;
 
       nfts = await fetch(fetchURL, requestOptions).then(data => data.json())
+    } else {
+      console.log("fetching NFTs for collection owned by address")
+      const fetchURL = `{$baseURL}?owner=${wallet}&contractAddresses%5B%5D=${collection}`;
+      nfts= await fetch(fetchURL, requestOptions).then(data => data.json())
     }
 
+  if (nfts) {
+    console.log("nfts:, nfts")
+    setNFTs(nfts.ownedNFTs)
   }
+
+  }
+
 
   return (
     <div className="flex flex-col items-center justify-center py-8 gap-y-3">
