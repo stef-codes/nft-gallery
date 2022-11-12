@@ -4,6 +4,7 @@ const Home = () => {
   const [wallet, setWalletAddress] = useState("");
   const [collection, setCollectionAddress] = useState("");
   const [NFT, setNFTs] = useState([])
+  const [fetchforCollection, setFetchForCollection]=useState(false)
  
   const fetchNFTs = async() => {
     let nfts; 
