@@ -31,6 +31,23 @@ const Home = () => {
 
   }
 
+  const fetchNFTsForCollection = async () => {
+    if (collection.length) {
+      var requestOptions = {
+          method: 'GET'
+      };
+      const api_key = "owZbZwB9hD1wDTBhsp74i5xpaXIzTBMb"
+      const baseURL = `https://eth-mainnet.g.alchemy.com/v2/${api_key}/getNFTsForCollection/`;
+      const fetchURL = `${baseURL}?contractAddress=${collection}&withMetadata=${"true"}`;
+      const nfts = await fetch(fetchURL, requestOptions).then(data => data.json())
+      if (nfts) {
+        console.log("NFTs in Collection:", nfts)
+        setNFTs(nfts.nfts)
+      }
+
+    }
+  }
+
 
   return (
     <div className="flex flex-col items-center justify-center py-8 gap-y-3">
