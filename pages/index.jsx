@@ -3,7 +3,7 @@ import { useState } from 'react'
 const Home = () => {
   const [wallet, setWalletAddress] = useState("");
   const [collection, setCollectionAddress] = useState("");
-  const [NFT, setNFTs] = useState([])
+  const [NFTs, setNFTs] = useState([])
   const [fetchforCollection, setFetchForCollection]=useState(false)
  
   const fetchNFTs = async() => {
@@ -63,6 +63,15 @@ const Home = () => {
             }else fetchNFTs()
           }
         }>Let's Go! </button>
+      </div>
+      <div className='flex flex-wrap gap-y-12 mt-4 w-5/6 gap-x-2 justify-center'>
+        {
+          NFTs.length && NFTs.map(nft => {
+            return (
+              <NFTCard nft={nft}></NFTCard>
+            )
+          })
+        }
       </div>
     </div>
   )
